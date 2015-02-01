@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="TagFight">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>#TagFight!</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="justified-nav.css" rel="stylesheet">
+</head>
+
+<body ng-controller="MainCtrl">
+
+<div class="container">
+
+  <!--<div class="masthead">-->
+  <!--<h3 class="text-muted">Project name</h3>-->
+  <!--<nav>-->
+  <!--<ul class="nav nav-justified">-->
+  <!--<li class="active"><a href="#">Home</a></li>-->
+  <!--<li><a href="#">Projects</a></li>-->
+  <!--<li><a href="#">Services</a></li>-->
+  <!--<li><a href="#">Downloads</a></li>-->
+  <!--<li><a href="#">About</a></li>-->
+  <!--<li><a href="#">Contact</a></li>-->
+  <!--</ul>-->
+  <!--</nav>-->
+  <!--</div>-->
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <h1># Tag Fight!</h1>
+    <p class="lead">Plataforma de Disputa entre Hashtags! Escolha a as Hasshtags, e veja qual está sendo mais comentada nas redes sociais</p>
+
+    <!--<div class="input-group input-group-lg">-->
+      <!--<span class="input-group-addon" id="sizing-addon1">#</span>-->
+      <!--<input name ="dataTag" type="text" class="form-control" ng-model="dataTag" placeholder="HashTag ou Termo" aria-describedby="sizing-addon1">-->
+      <!--<input name ="dataTag" type="text" class="form-control" ng-model="dataTag" placeholder="HashTag ou Termo" aria-describedby="sizing-addon1">-->
+    <!--</div>-->
+    <p>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon1">#</span>
+          <input type="text" class="form-control" aria-label="..." ng-model="dataTags.tag1">
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2">#</span>
+          <input type="text" class="form-control" aria-label="..." ng-model="dataTags.tag2">
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    </p>
+    <p ng-click="startup()" class="btn btn-lg btn-success" role="button" >Comece agora!</p>
+    <p ng-click="stop()" class="btn btn-lg btn-danger" role="button" >Parar Monitoramento</p>
+  </div>
+
+  <!-- Example row of columns -->
+  <div class="row">
+    <!--<div class="col-lg-6">-->
+      <!--<h1 class="social social-instagram">Instagram</h1>-->
+      <!--<h2># {{ tag }}</h2>-->
+      <!--<h2><span class="label label-info">{{ Icount }}</span></h2>-->
+      <!--&lt;!&ndash;<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>&ndash;&gt;-->
+      <!--&lt;!&ndash;<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>&ndash;&gt;-->
+    <!--</div>-->
+    <div class="col-lg-4">
+      <h2># {{ dataTags.tag1 }}</h2>
+      <h2><span class="label label-info" >{{ Tcount1 }}</span></h2>
+    </div>
+    <div class="col-lg-4">
+    <h2># {{ dataTags.tag2 }}</h2>
+    <h2><span class="label label-info" >{{ Tcount2 }}</span></h2>
+    </div>
+  </div>
+
+  <!-- Site footer -->
+  <footer class="footer">
+    <p>&copy; Company 2014</p>
+  </footer>
+
+</div> <!-- /container -->
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+<script src="/socket.io/socket.io.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="Controllers.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+</body>
+</html>
