@@ -1,0 +1,41 @@
+{
+  "name": "tagcount",
+  "version": "0.0.0",
+  "description": "A sample counter tags from twitter.",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "Jota",
+    "email": "jotaskt@gmail.com",
+    "url": "http://www.openshift.com/"
+  },
+  "homepage": "http://www.openshift.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jotadepaula/tagcount.git"
+  },
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+
+  "dependencies": {
+    "express" : "~4.0.0",    
+    "http" : "latest",    
+    "request": "2.9.x",        
+    "morgan": "~1.0.0",    
+    "cookie-parser": "~1.0.0",    
+    "twit": "~1.1.18",    
+    "method-override": "~1.0.0"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": false,
+  "main": "app.js"
+}
