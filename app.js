@@ -10,6 +10,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 9000;
 var server = http.createServer(app).listen(port,ip, function() {
   console.log('Express server listening on port ' + port);
 });
+
 var Twit = require('twit');
 var twitterConfig = require('./config/twitterConfig');
 var T = new Twit({
@@ -18,6 +19,7 @@ var T = new Twit({
   access_token: twitterConfig.TOKEN,
   access_token_secret: twitterConfig.TOKEN_SECRET
 });
+
 app.use(express.static(__dirname + "/public"));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -27,7 +29,15 @@ app.use(methodOverride());
     var streamEngine = require('./app/streamEngine');
     var s = new streamEngine(T);
     var s1 = s.createStream('bbb');
+
     s.startStream(s1);
+    var ontwit = function (tweet) {
+      console.log(tweet);
+    }
+    s.onTweet(s1,function (tweet) {
+      console.log(tweet);
+    });
+    //s.stopStream(s1);
 // require('./app/socketEngine')(server);
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/public/index.html');
