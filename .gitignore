@@ -30,6 +30,7 @@ build/Release
 node_modules
 config
 client/bower_components
+bower_components
 
 # Debug log from npm
 npm-debug.log
