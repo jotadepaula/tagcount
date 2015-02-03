@@ -26,11 +26,13 @@
 
   "dependencies": {
     "express" : "~4.0.0",    
+
     "http" : "latest",    
-    "request": "2.9.x",        
+    "request": "2.9.x",          
     "morgan": "~1.0.0",    
     "cookie-parser": "~1.0.0",    
     "twit": "~1.1.18",    
+    "body-parser": "~1.0.0",
     "method-override": "~1.0.0"
   },
   "devDependencies": {},
