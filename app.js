@@ -26,17 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(methodOverride());
     // var io = require('socket.io')(server);
-    var streamEngine = require('./app/streamEngine');
-    var s = new streamEngine(T);
-    var s1 = s.createStream('bbb');
-
-    s.startStream(s1);
-    var ontwit = function (tweet) {
-      console.log(tweet);
-    }
-    s.onTweet(s1,function (tweet) {
-      console.log(tweet);
-    });
+    
     //s.stopStream(s1);
 // require('./app/socketEngine')(server);
 app.get('/', function (req, res) {
