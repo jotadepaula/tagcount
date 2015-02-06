@@ -20,15 +20,16 @@ var T = new Twit({
   access_token_secret: twitterConfig.TOKEN_SECRET
 });
 
-app.use(express.static(__dirname + "/public"));
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/client/index.html');
+});
+
+app.use(express.static(__dirname + "/client"));
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(methodOverride());
     // var io = require('socket.io')(server);
     
     //s.stopStream(s1);
-// require('./app/socketEngine')(server);
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/public/index.html');
-});
+require('./app/socketEngine')(server);

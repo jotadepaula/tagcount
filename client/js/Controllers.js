@@ -10,8 +10,8 @@ tagApp.controller('MainCtrl',function($scope,$http){
     token = generateToken();
     var tk = new tokenManager();
     tk.saveToken(token);
-    socket = io.connect('http://localhost:9000');
-    socket.emit('login',{ token: token, twt: true });
+    socket = io.connect('ws://localhost:9000');
+    socket.emit('START',{ token: token, twt: true });
     console.log("loguei");
 
     //socket.on('result',function(data){
@@ -123,25 +123,25 @@ tagApp.controller('MainCtrl',function($scope,$http){
     }
 
   }
+    $scope.startup = login();
+    // $scope.startup = function(){
 
-    $scope.startup = function(){
+      // login(token);
 
-      login(token);
+      // socket.on('news', function (data) {
+      //   // if(data.insta){
+      //   //   getInstagramCount(socket);
+      //   // }
+      //   if(compareToken(data.token)){
+      //     if(data.twt){
+      //       console.log("RECEBI ESSE TOKEN " , data);
+      //       getTwitterCount(socket);
+      //     }
+      //   }
 
-      socket.on('news', function (data) {
-        // if(data.insta){
-        //   getInstagramCount(socket);
-        // }
-        if(compareToken(data.token)){
-          if(data.twt){
-            console.log("RECEBI ESSE TOKEN " , data);
-            getTwitterCount(socket);
-          }
-        }
+      // });
 
-      });
-
-    };
+    // };
 
   $scope.stop = function(){
 

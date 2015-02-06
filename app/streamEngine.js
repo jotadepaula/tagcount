@@ -18,3 +18,15 @@ module.exports = function (Twit){
 		stream.on(TWEET,callback);
 	};  
 }
+/**
+socket.on(ADD_CLIENT, function (username) {
+  socket.username = username;    
+  users[username] = username;
+  users[id]   = socket.id;
+  ++numUsers;
+  addedUser = true;
+  socket.emit(NEWS, {
+    username: username
+  });
+}
+**/
