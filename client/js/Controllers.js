@@ -7,12 +7,10 @@ tagApp.controller('MainCtrl',function($scope,$http){
 
   function login(){
 
-    token = generateToken();
-    var tk = new tokenManager();
-    tk.saveToken(token);
-    socket = io.connect('ws://localhost:9000');
-    socket.emit('START',{ token: token, twt: true });
-    console.log("loguei");
+    // token = generateToken();
+    // var tk = new tokenManager();
+    // tk.saveToken(token);
+
 
     //socket.on('result',function(data){
     //  console.log('Get TWitter Data '+ data.count);
@@ -87,12 +85,12 @@ tagApp.controller('MainCtrl',function($scope,$http){
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function generateToken(){
-    var str1 = $scope.dataTags.tag1;
-    var str2 = $scope.dataTags.tag2;
-    var token = str1+str2+getRandomInt(0,999);
-    return token
-  }
+  // function generateToken(){
+  //   var str1 = $scope.dataTags.tag1;
+  //   var str2 = $scope.dataTags.tag2;
+  //   var token = str1+str2+getRandomInt(0,999);
+  //   return token
+  // }
 
   function tokenManager(){
 
@@ -123,30 +121,40 @@ tagApp.controller('MainCtrl',function($scope,$http){
     }
 
   }
-    $scope.startup = login();
-    // $scope.startup = function(){
 
-      // login(token);
+    $scope.startup = function(){
 
-      // socket.on('news', function (data) {
-      //   // if(data.insta){
-      //   //   getInstagramCount(socket);
-      //   // }
-      //   if(compareToken(data.token)){
-      //     if(data.twt){
-      //       console.log("RECEBI ESSE TOKEN " , data);
-      //       getTwitterCount(socket);
-      //     }
-      //   }
+    socket = io.connect('ws://localhost:9000');
+    socket.emit('START',{ username: socket.name, track: 'BBB'});
+    console.log("loguei");
 
-      // });
+      socket.on('news', function (data) {
+        // if(data.insta){
+        //   getInstagramCount(socket);
+        // }
+        if(compareToken(data.token)){
+          if(data.twt){
+            console.log("RECEBI ESSE TOKEN " , data);
+            getTwitterCount(socket);
+          }
+        }
+      });
 
-    // };
+      socket.on('START',function(data){
+         console.log(data);
+      });
+
+    };
 
   $scope.stop = function(){
 
-    stopConnections(socket);
+    // stopConnections(socket);
+    // socket.disconnect();
+    socket.emit('USR',{ username: socket.id});
 
+    socket.on('event',function(data){
+         console.log(data);
+      });
   };
 
   $scope.log = function(){
