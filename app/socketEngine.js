@@ -21,25 +21,38 @@ module.exports = function (server) {
     var streamEngine = require('../app/streamEngine');
     var s = new streamEngine(T);
     var s1 = s.createStream(track);
-    s.startStream(s1);
-    s.onTweet(s1,function (tweet) {
-     console.log(tweet);
-   });
+    return s1;
+    //s.startStream(s1);
+   // s.onTweet(s1,function (tweet) {
+   //  console.log(tweet);
+   //});
   };
 
-  io.on('connection',function(socket){
+  io.sockets.on('connection',function(socket){
     console.log('conectaram aqui',socket.id);
     users[socket.id] = socket;
 
     socket.on('USR',function(username) {
        console.log('Useres');
        console.log(username);
-       io.to(username.username).emit("event", { data: "msg"} );
+       //io.to(username.username).emit("event", { data: "msg"} );
     });
 
     socket.on(START_STREAM,function(data){
       console.log(data);
-      handleStream(data.track);
+
+      users[socket.id]['stream'] = handleStream(data.track);
+      users[socket.id]['userTrack'] = data.track;
+      var userStream = users[socket.id]['stream'];
+      var userTrack = users[socket.id]['userTrack'];
+      socket = users[socket.id];
+      console.log('Set user stream');
+      //var data = {
+      //             id:users[socket.id],
+      //             stream:users[socket.id]['stream']
+      //            };
+      socket.emit('news',userTrack);
+      //io.to(users[socket.id]).emit("event",data);
     });
 
   });

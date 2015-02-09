@@ -125,22 +125,26 @@ tagApp.controller('MainCtrl',function($scope,$http){
     $scope.startup = function(){
 
     socket = io.connect('ws://localhost:9000');
-    socket.emit('START',{ username: socket.name, track: 'BBB'});
+    socket.emit('START',{track: $scope.dataTags.tag1});
     console.log("loguei");
 
       socket.on('news', function (data) {
         // if(data.insta){
         //   getInstagramCount(socket);
         // }
-        if(compareToken(data.token)){
-          if(data.twt){
-            console.log("RECEBI ESSE TOKEN " , data);
-            getTwitterCount(socket);
-          }
-        }
+        //if(compareToken(data.token)){
+        //  if(data.twt){
+        //    console.log("RECEBI ESSE TOKEN " , data);
+        //    getTwitterCount(socket);
+        //  }
+        //}
+        console.log(data);
       });
 
       socket.on('START',function(data){
+         console.log(data);
+      });
+      socket.on('event',function(data){
          console.log(data);
       });
 
