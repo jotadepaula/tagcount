@@ -5,35 +5,6 @@ tagApp.controller('MainCtrl',function($scope,$http){
   var socket;
   var token;
 
-  function login(){
-
-    // token = generateToken();
-    // var tk = new tokenManager();
-    // tk.saveToken(token);
-
-
-    //socket.on('result',function(data){
-    //  console.log('Get TWitter Data '+ data.count);
-    //
-    //  if(data.order == 1){
-    //    $scope.$apply(function () {
-    //      $scope.Tcount1 = data.count;
-    //      //$scope.track = trackData;
-    //    });
-    //    socket.emit('twt',{ track: trackData.tag2,order:2});
-    //  }
-    //
-    //  if(data.order == 2){
-    //    $scope.$apply(function () {
-    //      $scope.Tcount2 = data.count;
-    //      //$scope.track = trackData;
-    //    });
-    //    socket.emit('twt',{ track: trackData.tag1,order:1});
-    //  }
-    //
-    //});
-  }
-
   function getInstagramCount(socket) {
     var dataTag = { data : $scope.dataTags };
 
@@ -123,9 +94,12 @@ tagApp.controller('MainCtrl',function($scope,$http){
   }
 
     $scope.startup = function(){
+    var track = {};
+    track.tag1 = $scope.dataTags.tag1;
+    track.tag2 = $scope.dataTags.tag2;
 
     socket = io.connect('ws://localhost:9000');
-    socket.emit('START',{track: $scope.dataTags.tag1});
+    socket.emit('START',{track: track});
     console.log("loguei");
 
       socket.on('news', function (data) {

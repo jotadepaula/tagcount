@@ -22,10 +22,6 @@ module.exports = function (server) {
     var s = new streamEngine(T);
     var s1 = s.createStream(track);
     return s1;
-    //s.startStream(s1);
-   // s.onTweet(s1,function (tweet) {
-   //  console.log(tweet);
-   //});
   };
 
   io.sockets.on('connection',function(socket){
@@ -40,30 +36,31 @@ module.exports = function (server) {
     socket.on(START_STREAM,function(data){
       console.log(data);
 
-      users[socket.id]['stream'] = handleStream(data.track);
+      users[socket.id]['stream1'] = handleStream(data.track.tag1);
+      users[socket.id]['stream2'] = handleStream(data.track.tag2);
+      users[socket.id]['stream1']['count'] = 0;      
+      users[socket.id]['stream2']['count'] = 0;      
       users[socket.id]['userTrack'] = data.track;
-      var userStream = users[socket.id]['stream'];
-      var userTrack = users[socket.id]['userTrack'];
-      socket = users[socket.id];
-      console.log('Set this user '+users[socket.id]['userTrack']);
-      
-      socket.emit('news',userTrack);
+      var userStream1 = users[socket.id]['stream1'];
+      var userStream2 = users[socket.id]['stream2'];
+
+      var userTrack1 = users[socket.id]['userTrack'].tag1;
+      var userTrack2 = users[socket.id]['userTrack'].tag2;
+      var dataTag = { tag1: userTrack1, tag2: userTrack2 };
+      socket = users[socket.id];      
+      userStream1.on('tweet', function (tweet) {        
+        dataTag.count1 = users[socket.id]['stream1']['count']++;
+        console.log(dataTag.tag1+dataTag.count1);
+        socket.emit('news',dataTag);
+      });
+
+      userStream2.on('tweet', function (tweet) {
+        dataTag.count2 = users[socket.id]['stream2']['count']++;
+        console.log(dataTag.tag2+dataTag.count2);
+        socket.emit('news',dataTag);
+      });
     });
 
   });
-  io.on(START_STREAM,function(data){
-    // we tell the client to execute 'new message'
-    // socket.emit(NEWS, {
-    //   username: username
-    // });
-    //handleStream(data.track1);
-    //handleStream(data.track2);
-    // console.log('Useres');
-    // console.log(users);
-
-    socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data
-    });
-  });
+  
 };
