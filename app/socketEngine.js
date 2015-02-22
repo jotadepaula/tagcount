@@ -60,6 +60,9 @@ module.exports = function (server) {
         socket.emit('news',dataTag);
       });
     });
+    socket.on(STOP_STREAM,function(data){
+
+    });
 
   });
   
