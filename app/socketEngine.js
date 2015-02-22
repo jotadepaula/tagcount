@@ -35,7 +35,6 @@ module.exports = function (server) {
     socket.on('USR',function(username) {
        console.log('Useres');
        console.log(username);
-       //io.to(username.username).emit("event", { data: "msg"} );
     });
 
     socket.on(START_STREAM,function(data){
@@ -46,13 +45,9 @@ module.exports = function (server) {
       var userStream = users[socket.id]['stream'];
       var userTrack = users[socket.id]['userTrack'];
       socket = users[socket.id];
-      console.log('Set user stream');
-      //var data = {
-      //             id:users[socket.id],
-      //             stream:users[socket.id]['stream']
-      //            };
+      console.log('Set this user '+users[socket.id]['userTrack']);
+      
       socket.emit('news',userTrack);
-      //io.to(users[socket.id]).emit("event",data);
     });
 
   });
