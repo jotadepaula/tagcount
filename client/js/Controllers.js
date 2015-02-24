@@ -49,14 +49,11 @@ tagApp.controller('MainCtrl',function($scope,$http){
     };
 
   $scope.stop = function(){
-
+    socket.emit('stop',{data: 'stop'});
+    console.log('parou');
     // stopConnections(socket);
-    // socket.disconnect();
-    socket.emit('USR',{ username: socket.id});
-
-    socket.on('event',function(data){
-         console.log(data);
-      });
+    socket.disconnect();
+    
   };
 
 });
